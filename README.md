@@ -3,9 +3,9 @@
 **Pick the right reporting checklists for a musculoskeletal imaging AI study, before you write it up.**
 
 [![Licence: Apache 2.0](https://img.shields.io/badge/licence-Apache%202.0-2E6E9E)](LICENSE)
-[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-SKILL.md-D97757)](skills/report-right/SKILL.md)
+[![Agent Skill](https://img.shields.io/static/v1?label=Agent%20Skill&message=SKILL.md&color=D97757)](skills/report-right/SKILL.md)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757)](#use-it-with-an-ai-assistant)
-[![Version 2.2](https://img.shields.io/badge/version-2.2-555555)](skills/report-right/SKILL.md)
+[![Version 2.2](https://img.shields.io/static/v1?label=version&message=2.2&color=555555)](skills/report-right/SKILL.md)
 
 Reporting guidelines, quality scores and risk-of-bias tools for AI studies have multiplied, and it is
 often unclear which ones apply. ReportRight is an **Agent Skill** that any LLM-based assistant can
