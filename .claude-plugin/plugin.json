@@ -1,0 +1,10 @@
+{
+  "name": "report-right",
+  "version": "2.2.0",
+  "description": "Recommends reporting checklists and quality or risk-of-bias tools for AI, radiomics and LLM studies in musculoskeletal radiology: CLAIM 2024 as the base checklist plus one study-specific checklist chosen by study design.",
+  "author": { "name": "Konstantinos Vrettos" },
+  "homepage": "https://github.com/ATI-lab-UoC/ReportRight",
+  "repository": "https://github.com/ATI-lab-UoC/ReportRight",
+  "license": "Apache-2.0",
+  "keywords": ["radiology", "musculoskeletal", "reporting-guidelines", "CLAIM", "radiomics", "LLM", "checklist"]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "report-right",
+  "description": "Agent Skill that recommends reporting checklists and appraisal tools for MSK radiology AI studies.",
+  "owner": { "name": "Konstantinos Vrettos" },
+  "plugins": [
+    {
+      "name": "report-right",
+      "source": "./",
+      "description": "Pick the right reporting checklists and appraisal tools for an MSK imaging AI, radiomics or LLM study.",
+      "version": "2.2.0"
+    }
+  ]
+}
