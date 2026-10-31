@@ -9,7 +9,7 @@
 
 Reporting guidelines, quality scores and risk-of-bias tools for AI studies have multiplied, and it is
 often unclear which ones apply. ReportRight is an **Agent Skill** that any LLM-based assistant can
-load to classify a manuscript and to return the recommended checklists and appraisal tools. The skill asks clarifying questions when key facts are missing, runs specific checks (such as assessing whether ordinal grades were reduced to binary outcomes and image- versus patient-level partitioning) and warns against the pitfalls. The skill returns the checklists,MSK-specific reminders and a machine-readable summary.
+load to classify a manuscript and to return the recommended checklists and appraisal tools. The skill asks clarifying questions when key facts are missing, runs specific checks (such as assessing whether ordinal grades were reduced to binary outcomes and image- versus patient-level partitioning) and warns against common pitfalls. The skill returns the checklists, MSK-specific reminders and a machine-readable summary.
 
 ReportRight recommends checklists. It does not complete them or check a manuscript against them.
 
