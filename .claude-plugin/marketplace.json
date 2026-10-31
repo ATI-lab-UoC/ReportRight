@@ -7,7 +7,7 @@
       "name": "report-right",
       "source": "./",
       "description": "Pick the right reporting checklists and appraisal tools for an MSK imaging AI, radiomics or LLM study.",
-      "version": "2.2.0"
+      "version": "2.3.0"
     }
   ]
 }

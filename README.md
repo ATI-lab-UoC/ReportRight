@@ -3,22 +3,28 @@
 **Pick the right reporting checklists for a musculoskeletal imaging AI study, before you write it up.**
 
 [![Licence: Apache 2.0](https://img.shields.io/badge/licence-Apache%202.0-2E6E9E)](LICENSE)
-[![Agent Skill](https://img.shields.io/static/v1?label=Agent%20Skill&message=SKILL.md&color=D97757)](skills/report-right/SKILL.md)
+[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-SKILL.md-D97757)](skills/report-right/SKILL.md)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757)](#use-it-with-an-ai-assistant)
-[![Version 2.2](https://img.shields.io/static/v1?label=version&message=2.2&color=555555)](skills/report-right/SKILL.md)
+[![Version 2.3](https://img.shields.io/badge/version-2.3-555555)](skills/report-right/SKILL.md)
 
 Reporting guidelines, quality scores and risk-of-bias tools for AI studies have multiplied, and it is
 often unclear which ones apply. ReportRight is an **Agent Skill** that any LLM-based assistant can
-load. It uses **CLAIM 2024 as the base checklist** for any study that applies AI to medical images and
-adds **one study-specific checklist** chosen by the study design, such as STARD-AI for diagnostic
-accuracy, TRIPOD+AI for prediction models, CLEAR for radiomics or FLAIR for LLM studies. An
-**appraisal tool** is added for self-checking. Nine yes/no questions assign one of 12 musculoskeletal
-(MSK) study types, and the skill returns the checklists, MSK-specific reminders and a
-machine-readable summary.
+load. It picks **one main checklist**, the reporting guideline written for the study design: STARD-AI
+for diagnostic accuracy, TRIPOD+AI for prediction models, CLEAR for radiomics, FLAIR for LLM studies,
+or **CLAIM 2024** where no more specific guideline exists (detection, segmentation and image-generation
+models). **Items from other checklists**, often CLAIM's items on the image data, are added only where
+the main checklist is silent, and an **appraisal tool** is added for self-checking. Nine yes/no
+questions assign one of 12 musculoskeletal (MSK) study types, and the skill returns the checklists,
+MSK-specific reminders and a machine-readable summary.
 
 On 50 MSK imaging AI papers published in 2024–2026, three Claude models of different size, with
-repeated runs, agreed on the study type for 46 of 50 papers (Fleiss κ = 0.95) and on the recommended
-checklists for 48 of 50 (κ = 0.98).
+repeated runs, agreed on the study type for 48 of 50 papers (Fleiss κ = 0.98) and on the main
+checklist for all 50 (κ = 1.00). Every run matched the main checklist assigned by the authors for all
+50 papers and their study type for 48. On the other two, one run labelled a detection model as
+segmentation, which leads to the same main checklist. The rules are the same as in Table 2 and Fig. 2
+of the accompanying review.
+
+ReportRight recommends checklists. It does not complete them or check a manuscript against them.
 
 ## Use it with an AI assistant
 
@@ -58,9 +64,8 @@ confident with the full manuscript.
 
 | Symbol | Element | What it is |
 |---|---|---|
-| ■ | Base checklist | CLAIM 2024, for any study that applies AI to medical images. Development items that do not apply are marked not applicable. |
-| ● | Study-specific checklist | The guideline written for the study design, reported together with CLAIM. |
-| ○ | Additional items | Applicable items from other checklists that the first two lack. Never a second full checklist. |
+| ● | Main checklist | The one reporting guideline written for the study design. CLAIM 2024 where no more specific guideline exists. |
+| ○ | Additional items | Applicable items from other checklists, only where the main checklist is silent. Never a second full checklist. |
 | ◆ | Appraisal tools | Quality or risk-of-bias tools for self-checking before submission and for peer review. |
 
 It also flags up to nine MSK-specific checks, such as a reference standard that does not match the
@@ -70,7 +75,7 @@ that predicts local recurrence of soft-tissue sarcoma:
 
 ```json
 {"study_type": "T3", "secondary_type": null,
- "base_checklist": ["CLAIM 2024"], "study_specific_checklist": ["CLEAR"],
+ "main_checklist": "CLEAR",
  "additional_items": ["IBSI", "TRIPOD+AI"], "appraisal_tools": ["METRICS", "RQS 2.0"],
  "msk_checks": [1, 3, 4], "path": ["Q1:no", "Q2:no", "Q3:no", "Q4:no", "Q5:no", "Q6:yes"],
  "confidence": "high", "rationale": "..."}
@@ -78,31 +83,32 @@ that predicts local recurrence of soft-tissue sarcoma:
 
 ## Which checklists for which study
 
-| Type | Study type | ■ Base checklist | ● Study-specific checklist | ○ Additional items | ◆ Appraisal tools |
-|---|---|---|---|---|---|
-| T1 | Imaging AI model development: detection, classification or grading | CLAIM 2024 | – | STARD-AI, TRIPOD+AI | QUADAS-3, PROBAST+AI |
-| T2 | Segmentation or automated measurement | CLAIM 2024 | – | RIDGE, Metrics Reloaded | – |
-| T3 | Radiomics (hand-crafted or deep features) | CLAIM 2024 | CLEAR | IBSI, TRIPOD+AI, GRRAS (feature reliability) | METRICS, RQS 2.0 |
-| T4 | Clinical prediction model (diagnostic or prognostic risk) | CLAIM 2024 | TRIPOD+AI | CLEAR | PROBAST+AI |
-| T5 | Accuracy of an existing AI tool or AI-assisted reading | CLAIM 2024 | STARD-AI | – | QUADAS-3 |
-| T6 | Image reconstruction, synthesis or enhancement | CLAIM 2024 | – | STARD-AI, GRRAS (agreement, interchangeability) | – |
-| T7 | LLM or multimodal generative AI in radiology | CLAIM 2024 | FLAIR | MI-CLEAR-LLM, TRIPOD-LLM, REFINE | AQAT:RoB |
-| T8 | Patient-facing chatbot or health advice | – | CHART | FLAIR, MI-CLEAR-LLM | AQAT:RoB |
-| T9 | Early-stage live clinical evaluation | CLAIM 2024 | DECIDE-AI | FUTURE-AI | – |
-| T10 | Randomised trial of an AI intervention (or its protocol) | CLAIM 2024 | SPIRIT-/CONSORT-AI | FUTURE-AI | – |
-| T11 | Systematic review or meta-analysis of AI studies | – | PRISMA 2020 / PRISMA-DTA | – | QUADAS-3, PROBAST+AI, METRICS, RQS 2.0, AQAT:RoB |
-| T12 | Imaging dataset publication | – | TRAM-AI | CLAIM 2024, STANDING Together | – |
+| Type | Study type | ● Main checklist | ○ Additional items (when) | ◆ Appraisal tools |
+|---|---|---|---|---|
+| T1 | Imaging AI model development: detection, classification or grading | CLAIM 2024 | STARD-AI (accuracy against a reference standard) | QUADAS-3, PROBAST+AI |
+| T2 | Segmentation or automated measurement | CLAIM 2024 | RIDGE; Metrics Reloaded (metric choice) | – |
+| T3 | Radiomics (hand-crafted or deep features) | CLEAR | IBSI; TRIPOD+AI (future outcome predicted); CLAIM 2024 (deep-learning features or models) | METRICS, RQS 2.0 |
+| T4 | Clinical prediction model (diagnostic or prognostic risk) | TRIPOD+AI | CLAIM 2024 (image data and imaging model); CLEAR (radiomic predictors) | PROBAST+AI |
+| T5 | Evaluation of an existing AI tool or AI-assisted reading | STARD-AI; CLAIM 2024 if the endpoint is measurement or segmentation agreement or image quality, not diagnostic accuracy against a reference standard | CLAIM 2024 (image data, when STARD-AI is main); GRRAS (agreement, when CLAIM is main) | QUADAS-3 |
+| T6 | Image reconstruction, synthesis or enhancement | CLAIM 2024 | GRRAS (agreement and interchangeability); STARD-AI (diagnostic accuracy assessed) | – |
+| T7 | LLM or multimodal generative AI in radiology | FLAIR; TRIPOD-LLM if the task involves neither images nor radiology reports | MI-CLEAR-LLM (accuracy evaluation) | AQAT:RoB |
+| T8 | Patient-facing chatbot or health advice | CHART | FLAIR (radiology content); MI-CLEAR-LLM (accuracy evaluation) | AQAT:RoB |
+| T9 | Early-stage live clinical evaluation | DECIDE-AI | FUTURE-AI | – |
+| T10 | Randomised trial of an AI intervention (or its protocol) | SPIRIT-AI / CONSORT-AI | FUTURE-AI | – |
+| T11 | Systematic review or meta-analysis of AI studies | PRISMA 2020 / PRISMA-DTA | – | QUADAS-3, PROBAST+AI, METRICS, RQS 2.0 |
+| T12 | Imaging dataset publication | TRAM-AI | STANDING Together; CLAIM 2024 (image data and annotation) | – |
 
-Special cases: use REFINE or TRIPOD-LLM as the study-specific checklist when an LLM or foundation
-model is fine-tuned or developed. Add TRIPOD+AI items when a radiomics model predicts a future
-outcome, CLEAR items when radiomic features are predictors in a clinical model, and STARD-AI items
-when an in-house model's accuracy is reported against a reference standard. Consult FUTURE-AI before
-deployment, and always check what the target journal requires.
+Special cases: add REFINE or TRIPOD-LLM items to FLAIR when an LLM or foundation model is fine-tuned
+or developed. Use SPIRIT-AI for a trial protocol and PRISMA-DTA for a review that pools diagnostic
+accuracy. Consult FUTURE-AI before deployment, and always check what the target journal requires;
+some journals ask for CLAIM for every AI study.
 
 ## Limitations
 
-- Agreement between models shows that the rules are applied consistently. It does not show that the
-  recommendations are correct, so treat the output as a starting point for your own judgement.
+- The rules were refined on the same 50 papers and the reference labels were assigned by the authors,
+  so the agreement and correctness estimates are probably optimistic. Treat the output as a starting
+  point for your own judgement.
+- All tested models came from one vendor (Anthropic). Other models may apply the rules differently.
 - The instrument list reflects the literature up to October 2026. Check for newer versions.
 
 ## Citing this
