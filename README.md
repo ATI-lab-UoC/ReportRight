@@ -9,20 +9,7 @@
 
 Reporting guidelines, quality scores and risk-of-bias tools for AI studies have multiplied, and it is
 often unclear which ones apply. ReportRight is an **Agent Skill** that any LLM-based assistant can
-load. It picks **one main checklist**, the reporting guideline written for the study design: STARD-AI
-for diagnostic accuracy, TRIPOD+AI for prediction models, CLEAR for radiomics, FLAIR for LLM studies,
-or **CLAIM 2024** where no more specific guideline exists (detection, segmentation and image-generation
-models). **Items from other checklists**, often CLAIM's items on the image data, are added only where
-the main checklist is silent, and an **appraisal tool** is added for self-checking. Nine yes/no
-questions assign one of 12 musculoskeletal (MSK) study types, and the skill returns the checklists,
-MSK-specific reminders and a machine-readable summary.
-
-On 50 MSK imaging AI papers published in 2024–2026, three Claude models of different size, with
-repeated runs, agreed on the study type for 48 of 50 papers (Fleiss κ = 0.98) and on the main
-checklist for all 50 (κ = 1.00). Every run matched the main checklist assigned by the authors for all
-50 papers and their study type for 48. On the other two, one run labelled a detection model as
-segmentation, which leads to the same main checklist. The rules are the same as in Table 2 and Fig. 2
-of the accompanying review.
+load to classify a manuscript and to return the recommended checklists and appraisal tools. The skill asks clarifying questions when key facts are missing, runs specific checks (such as assessing whether ordinal grades were reduced to binary outcomes and image- versus patient-level partitioning) and warns against the pitfalls. The skill returns the checklists,MSK-specific reminders and a machine-readable summary.
 
 ReportRight recommends checklists. It does not complete them or check a manuscript against them.
 
